@@ -9,12 +9,12 @@ pipeline {
         }
         stage('Download Data') {
             steps {
-                sh 'python data_download.py'
+                sh 'python download_data.py'
             }
         }
         stage('Preprocess Data') {
             steps {
-                sh 'python data_preprocessing.py'
+                sh 'python process_data.py'
             }
         }
         stage('Train Model') {
