@@ -1,13 +1,17 @@
 pipeline {
     agent any
-
-    stage('Clone Repo') {
+    stages {
+        stage('Clone repository') {
             steps {
                 git 'https://github.com/Araelka/AMO_2.git'
             }
         }
-
-    stages {
+        
+        stage('Install dependencies') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
         stage('Сбор данных') {
             steps {
                 script {
