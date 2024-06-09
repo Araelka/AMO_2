@@ -1,26 +1,34 @@
 pipeline {
     agent any
-
     stages {
-        stage('Download Data') {
+        stage('Clone') {
             steps {
-                sh 'wget https://github.com/gainadir12/Diabet/archive/refs/heads/main.zip -O diabet_data.zip'
-                sh 'unzip diabet_data.zip'
+                git 'https://github.com/Araelka/AMO_2.git'
             }
         }
-        stage('Process Data') {
+        stage('Install Dependencies') {
             steps {
-                sh 'source ml_env/bin/activate && python process_data.py'
+                sh 'pip install -r requirements.txt'
+            }
+        }
+        stage('Download Data') {
+            steps {
+                sh 'python data_download.py'
+            }
+        }
+        stage('Preprocess Data') {
+            steps {
+                sh 'python data_preprocessing.py'
             }
         }
         stage('Train Model') {
             steps {
-                sh 'source ml_env/bin/activate && python train_model.py'
+                sh 'python train_model.py'
             }
         }
         stage('Evaluate Model') {
             steps {
-                sh 'source ml_env/bin/activate && python evaluate_model.py'
+                sh 'python evaluate_model.py'
             }
         }
     }
