@@ -1,5 +1,12 @@
 pipeline {
     agent any
+
+    stage('Clone Repo') {
+            steps {
+                git 'https://github.com/Araelka/AMO_2.git'
+            }
+        }
+
     stages {
         stage('Сбор данных') {
             steps {
