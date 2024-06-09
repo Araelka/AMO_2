@@ -1,30 +1,11 @@
-import os
-import pandas as pd
-import requests
-
-# Создание папки data, если она не существует
-if not os.path.exists('data'):
-    os.makedirs('data')
-
-# Функция для загрузки данных
-def download_data(url, output_path):
-    response = requests.get(url)
-    with open(output_path, 'wb') as f:
-        f.write(response.content)
-
-# URL репозитория и путь для сохранения данных
-github_url = 'https://github.com/gainadir12/Diabet/raw/main/Diabetes.csv'
-output_path = 'data/Diabetes.csv'
-
 # Загрузка данных
-download_data(github_url, output_path)
+from sklearn.datasets import load_breast_cancer
+import pandas as pd
 
-# Чтение данных в DataFrame
-data = pd.read_csv(output_path)
+# Загрузка набора данных
+data = load_breast_cancer()
+df = pd.DataFrame(data.data, columns=data.feature_names)
+df['target'] = data.target
 
-# Очистка данных (если необходимо)
-# Например, удаление строк с пропущенными значениями
-cleaned_data = data.dropna()
-
-# Сохранение очищенных данных
-cleaned_data.to_csv('data/cleaned_diabetes_data.csv', index=False)
+# Сохранение данных в CSV для использования в Jenkins
+df.to_csv('breast_cancer_data.csv', index=False)

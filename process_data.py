@@ -1,10 +1,14 @@
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
-# Загрузка данных
-data = pd.read_csv('Diabet-main/data.csv')
+df = pd.read_csv('breast_cancer_data.csv')
 
-# Обработка данных (пример)
-data['new_feature'] = data['feature1'] / data['feature2']
+X = df.drop(columns=['target'])
+y = df['target']
 
-# Сохранение обработанных данных
-data.to_csv('processed_data.csv', index=False)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+X_train.to_csv('X_train.csv', index=False)
+X_test.to_csv('X_test.csv', index=False)
+y_train.to_csv('y_train.csv', index=False)
+y_test.to_csv('y_test.csv', index=False)

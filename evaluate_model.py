@@ -1,20 +1,13 @@
 import pandas as pd
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import classification_report
 import pickle
 
-# Загрузка данных
-data = pd.read_csv('processed_data.csv')
+X_test = pd.read_csv('X_test.csv')
+y_test = pd.read_csv('y_test.csv')
 
-# Разделение данных
-X = data.drop('target', axis=1)
-y = data['target']
+with open('model.pkl', 'rb') as f:
+    model = pickle.load(f)
 
-# Загрузка модели
-with open('model.pkl', 'rb') as file:
-    model = pickle.load(file)
+predictions = model.predict(X_test)
 
-# Предсказание и оценка модели
-y_pred = model.predict(X)
-accuracy = accuracy_score(y, y_pred)
-
-print(f"Model Accuracy: {accuracy:.2f}")
+print(classification_report(y_test, predictions))
