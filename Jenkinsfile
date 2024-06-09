@@ -6,6 +6,11 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Araelka/AMO_2.git'
             }
         }
+        stage('Install dependencies') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
 
         stage('Сбор данных') {
            steps {
