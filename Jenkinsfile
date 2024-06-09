@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone repository') {
             steps {
-                git 'https://github.com/Araelka/AMO_2.git'
+                git branch: 'main', url: 'https://github.com/Araelka/AMO_2.git'
             }
         }
         
