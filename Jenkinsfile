@@ -7,11 +7,11 @@ pipeline {
             }
         }
         
-        stage('Install dependencies') {
-            steps {
-               bat 'pip install -r requirements.txt'
-            }
-        }
+        // stage('Install dependencies') {
+        //     steps {
+        //        bat 'pip install -r requirements.txt'
+        //     }
+        // }
         stage('Сбор данных') {
            steps {
                 script {
