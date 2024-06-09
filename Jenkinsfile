@@ -1,36 +1,18 @@
 pipeline {
     agent any
     stages {
-        stage('Сбор данных') {
+        stage('Clone Repository') {
             steps {
-                script {
-                    // Выполняем Python скрипт для загрузки данных
-                    bat 'python load_data.py'
-                }
+                // Клонирование репозитория
+                git 'https://github.com/Araelka/AMO_2.git'
             }
         }
-        stage('Подготовка данных') {
+        stage('Check Workspace') {
             steps {
-                script {
-                    // Выполняем Python скрипт для подготовки данных
-                    bat 'python prepare_data.py'
-                }
-            }
-        }
-        stage('Обучение модели') {
-            steps {
-                script {
-                    // Выполняем Python скрипт для обучения модели
-                    bat 'python train_model.py'
-                }
-            }
-        }
-        stage('Анализ модели') {
-            steps {
-                script {
-                    // Выполняем Python скрипт для анализа модели
-                    bat 'python evaluate_model.py'
-                }
+                // Вывод списка файлов в рабочей директории Jenkins
+                bat 'dir'
+                // Или на Unix-подобных системах
+                // sh 'ls'
             }
         }
     }
