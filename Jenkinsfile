@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script {
                     // Выполняем Python скрипт для загрузки данных
-                    sh 'python load_data.py'
+                    sh 'python3 load_data.py'
                 }
             }
         }
@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     // Выполняем Python скрипт для подготовки данных
-                    sh 'python prepare_data.py'
+                    sh 'python3 prepare_data.py'
                 }
             }
         }
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     // Выполняем Python скрипт для обучения модели
-                    sh 'python train_model.py'
+                    sh 'python3 train_model.py'
                 }
             }
         }
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     // Выполняем Python скрипт для анализа модели
-                    sh 'python evaluate_model.py'
+                    sh 'python3 evaluate_model.py'
                 }
             }
         }
