@@ -1,30 +1,37 @@
 pipeline {
     agent any
     stages {
-        stage('Clone') {
+        stage('Сбор данных') {
             steps {
-                git 'https://github.com/Araelka/AMO_2/'
+                script {
+                    // Выполняем Python скрипт для загрузки данных
+                    sh 'python load_data.py'
+                }
             }
         }
-        }
-        stage('Download Data') {
+        stage('Подготовка данных') {
             steps {
-                sh 'python download_data.py'
+                script {
+                    // Выполняем Python скрипт для подготовки данных
+                    sh 'python prepare_data.py'
+                }
             }
         }
-        stage('Preprocess Data') {
+        stage('Обучение модели') {
             steps {
-                sh 'python process_data.py'
+                script {
+                    // Выполняем Python скрипт для обучения модели
+                    sh 'python train_model.py'
+                }
             }
         }
-        stage('Train Model') {
+        stage('Анализ модели') {
             steps {
-                sh 'python train_model.py'
-            }
-        }
-        stage('Evaluate Model') {
-            steps {
-                sh 'python evaluate_model.py'
+                script {
+                    // Выполняем Python скрипт для анализа модели
+                    sh 'python evaluate_model.py'
+                }
             }
         }
     }
+}
