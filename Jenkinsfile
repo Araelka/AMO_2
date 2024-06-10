@@ -1,12 +1,12 @@
 pipeline {
     agent any
     stages {
-        stage('Clone repository') {
+        stage('Копирование репрозитория') {
             steps {
                 git branch: 'main', url: 'https://github.com/Araelka/AMO_2.git'
             }
         }
-        stage('Install dependencies') {
+        stage('Установка библиотек') {
             steps {
                 bat 'pip install -r requirements.txt'
             }
